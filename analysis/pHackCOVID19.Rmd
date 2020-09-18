@@ -1,0 +1,84 @@
+---
+title: "pHackCOVID19"
+author: "hank"
+date: "2020-09-16"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+```{r read data}
+
+library(utils)
+library(broom)
+library(tidyverse)
+
+# Read in the data
+covid19Data <- read.csv('https://opendata.ecdc.europa.eu/covid19/casedistribution/csv', 
+                        na.strings = "", fileEncoding = 'UTF-8-BOM')
+
+```
+
+```{r pval loop}
+
+# Lets loop over days, regressing each day's country/territory case count on the square of the number of letters in each country's name :D
+
+# Empty vector for pvals
+pvals <- c()
+
+for (day in 1:length(unique(covid19Data$dateRep))){
+
+  # Get the data for this day
+  thisDaysData <- covid19Data[(covid19Data$dateRep == as.character(covid19Data$dateRep[day])), ]
+  
+  # Get the length of the country/territory names and square it
+  thisDaysData$nameLenSquared <- nchar(thisDaysData$countriesAndTerritories)^2
+
+  # Build the model
+  model <- lm(cases ~ nameLenSquared, 
+              data=thisDaysData)
+  
+  # Glance at it and grab the p-value
+  g <- glance(model)
+  pval <- as.double(g[, "p.value"])
+  pvals <- c(pvals, pval)
+
+}
+
+```
+
+```{r pval hists}
+
+# Lets look at the distributions of the p-values across the days
+hist(pvals)
+
+# What is the proportion of pvals that are significant at alpha = 0.05?
+length(pvals[pvals < 0.05])  / length(pvals[pvals > 0.05]) 
+
+```
+
+The histogram of p-values looks closer to a uniform distribution than a normal, so this suggests (as we know) that there is no significant relationship between these variables when "bootstrapping" this model across days.
+
+However, the number of p-values that are deemed significant is not a trivial amount...
+If one were to perform this analysis on a random day, there is a 17% chance that they would find a p-value deemed significant by alpha = 0.05. This illustrates that if an analysis like this is data-starved, ie only performed on a single day, there is a decent likelihood that a false conclusion could be reached. To correct for this, it is useful to test the potential observation of significant p-value by performing the same analysis on other days. To take it a step further, one should train the model on a subset of the days and test it on the remaining held-out set of days. We suggest that if this was performed there would be no significant result discovered. 
+
+# Tried cross validation but the result was not obviously interpretable...
+
+# ```{r cval}
+# 
+# library(lmvar)
+# 
+# # Get the length of the country/territory names and square it for the whole dataset
+# covid19Data$nameLenSquared <- nchar(covid19Data$countriesAndTerritories)^2
+# 
+# # Define the model
+# model = lm(cases ~ nameLenSquared, covid19Data, x = TRUE, y = TRUE)
+# 
+# # Cross validate it across days
+# cv = cv.lm(model, log = TRUE, ks_test = TRUE)
+# 
+# ```
+
+
