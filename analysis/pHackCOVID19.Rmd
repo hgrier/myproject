@@ -62,7 +62,7 @@ length(pvals[pvals < 0.05])  / length(pvals)
 The histogram of p-values looks closer to a uniform distribution than a normal, so this suggests (as we know) that there is no significant relationship between these variables when "bootstrapping" this model across days.
 
 However, the number of p-values that are deemed significant is not a trivial amount...
-If one were to perform this analysis on a random day, there is a 15.5% chance that they would find a p-value deemed significant by alpha = 0.05. This illustrates that if an analysis like this is data-starved, ie only performed on a single day, there is a decent likelihood that a false conclusion could be reached. To correct for this, it is useful to test the potential observation of significant p-value by performing the same analysis on other days. To take it a step further, one should train the model on a subset of the days and test it on the remaining held-out set of days. We suggest that if this was performed there would be no significant result discovered. 
+If one were to perform this analysis on a random day, there is a 15.5% chance that they would find a p-value deemed significant by alpha = 0.05. This illustrates that if an analysis like this is data-starved, ie only performed on a single day, there is a decent likelihood that a false conclusion could be reached. To correct for this, it is useful to test the potential observation of a significant p-value by performing the same analysis on data from other days. To take it a step further, one should train the model on a subset of the days and test it on the remaining held-out set of days. We suggest that if this was performed there would be no significant result discovered. 
 
 
 
