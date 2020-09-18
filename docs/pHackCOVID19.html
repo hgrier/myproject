@@ -504,16 +504,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomhgriermyprojecttree6a382b0613d851927bfc213b37a93d52c821ee4ftargetblank6a382b0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/hgrier/myproject/tree/6a382b0613d851927bfc213b37a93d52c821ee4f" target="_blank">6a382b0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomhgriermyprojecttree10280de8aa5530d3abd84ebaa205403a6f9233a4targetblank10280dea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/hgrier/myproject/tree/10280de8aa5530d3abd84ebaa205403a6f9233a4" target="_blank">10280de</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomhgriermyprojecttree6a382b0613d851927bfc213b37a93d52c821ee4ftargetblank6a382b0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomhgriermyprojecttree10280de8aa5530d3abd84ebaa205403a6f9233a4targetblank10280dea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/hgrier/myproject/tree/6a382b0613d851927bfc213b37a93d52c821ee4f" target="_blank">6a382b0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/hgrier/myproject/tree/10280de8aa5530d3abd84ebaa205403a6f9233a4" target="_blank">10280de</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -560,6 +560,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/hgrier/myproject/blob/10280de8aa5530d3abd84ebaa205403a6f9233a4/analysis/pHackCOVID19.Rmd" target="_blank">10280de</a>
+</td>
+<td>
+hank
+</td>
+<td>
+2020-09-18
+</td>
+<td>
+stats challenge analysis commit
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/hgrier/myproject/56c6dda7b72aa5e40d28e1b1a5b77dc79ca48adc/docs/pHackCOVID19.html" target="_blank">56c6dda</a>
+</td>
+<td>
+hank
+</td>
+<td>
+2020-09-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -735,7 +769,7 @@ hank
 length(pvals[pvals &lt; 0.05])  / length(pvals)</code></pre>
 <pre><code>[1] 0.1558935</code></pre>
 <p>The histogram of p-values looks closer to a uniform distribution than a normal, so this suggests (as we know) that there is no significant relationship between these variables when “bootstrapping” this model across days.</p>
-<p>However, the number of p-values that are deemed significant is not a trivial amount… If one were to perform this analysis on a random day, there is a 15.5% chance that they would find a p-value deemed significant by alpha = 0.05. This illustrates that if an analysis like this is data-starved, ie only performed on a single day, there is a decent likelihood that a false conclusion could be reached. To correct for this, it is useful to test the potential observation of significant p-value by performing the same analysis on other days. To take it a step further, one should train the model on a subset of the days and test it on the remaining held-out set of days. We suggest that if this was performed there would be no significant result discovered.</p>
+<p>However, the number of p-values that are deemed significant is not a trivial amount… If one were to perform this analysis on a random day, there is a 15.5% chance that they would find a p-value deemed significant by alpha = 0.05. This illustrates that if an analysis like this is data-starved, ie only performed on a single day, there is a decent likelihood that a false conclusion could be reached. To correct for this, it is useful to test the potential observation of a significant p-value by performing the same analysis on data from other days. To take it a step further, one should train the model on a subset of the days and test it on the remaining held-out set of days. We suggest that if this was performed there would be no significant result discovered.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
